@@ -7,11 +7,11 @@ const HomePage = () => {
     <div>
       <MainCarousel />
       <div className="space-y-10 py-10 flex flex-col justify-center">
-        <HomeSectionCarousel/>
-        <HomeSectionCarousel/>
-        <HomeSectionCarousel/>
-        <HomeSectionCarousel/>
-        <HomeSectionCarousel/>
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
       </div>
     </div>
   );
