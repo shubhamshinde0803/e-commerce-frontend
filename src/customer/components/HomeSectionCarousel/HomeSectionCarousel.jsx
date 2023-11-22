@@ -3,9 +3,8 @@ import AliceCarousel from "react-alice-carousel";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard/HomeSectionCard";
 import { Button } from "@mui/material";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { mens_kurta } from "../../../Data/mens_kurta";
 
-const HomeSectionCarousel = () => {
+const HomeSectionCarousel = ({data, sectionName}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const responsive = {
     0: { items: 1 },
@@ -18,11 +17,13 @@ const HomeSectionCarousel = () => {
 
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
 
-  const items = mens_kurta.slice(0, 10).map((item) => <HomeSectionCard product={item}/>);
+  const items = data.slice(0, 10).map((item) => <HomeSectionCard product={item}/>);
 
   return (
-    <div className="px-4 lg:px-8">
+    <div className="border">
+      <h2 className="text-2xl font-extrabold text-gray-800 py-5">{sectionName}</h2>
       <div className="relative p-5">
+        
         <AliceCarousel
           items={items}
           disableButtonsControls
@@ -39,17 +40,17 @@ const HomeSectionCarousel = () => {
             position: "absolute",
             top: "8rem",
             right: "0rem",
-            transform: "translateX(50%) rotate(-90deg)",
+            transform: "translateX(50%) rotate(90deg)",
             bgcolor: "white",
           }}
           aria-label="next"
         >
           <ArrowBackIosNewIcon
-            sx={{ transform: "rotate(-90deg)", color: "black" }}
+            sx={{ transform: "rotate(90deg)", color: "black" }}
           />
         </Button>}
 
-        <Button
+        {activeIndex !== 0 && <Button
           variant="contained"
           className="z=50 bg-white"
           onClick={slidePrev}
@@ -57,15 +58,15 @@ const HomeSectionCarousel = () => {
             position: "absolute",
             top: "8rem",
             left: "0rem",
-            transform: "translateX(-50%) rotate(90deg)",
+            transform: "translateX(-50%) rotate(-90deg)",
             bgcolor: "white",
           }}
           aria-label="next"
         >
           <ArrowBackIosNewIcon
-            sx={{ transform: "rotate(-90deg)", color: "black" }}
+            sx={{ transform: "rotate(90deg)", color: "black" }}
           />
-        </Button>
+        </Button>}
       </div>
     </div>
   );

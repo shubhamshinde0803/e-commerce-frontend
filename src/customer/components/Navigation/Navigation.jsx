@@ -6,6 +6,8 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { Avatar, Button, Menu, MenuItem } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
 
 const navigation = {
   categories: [
@@ -143,9 +145,27 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openUserMenu = Boolean(anchorEl);
+  
+  const handleUserClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  const handleCloseUserMenu = (event) => {
+    setAnchorEl(null);
+  }
+
+  const handleOpen = () => {
+    // setOpenAuthModel(true);
+  }
+
+  const handleClose = () => {
+    // setOpenAuthModel(false);
+  }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white z-50">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -293,14 +313,6 @@ export default function Navigation() {
                       Sign in
                     </a>
                   </div>
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Create account
-                    </a>
-                  </div>
                 </div>
 
                 <div className="border-t border-gray-200 px-4 py-6">
@@ -329,16 +341,15 @@ export default function Navigation() {
 
         <nav
           aria-label="Top"
-          className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+          className="mx-auto"
         >
           <div className="border-b border-gray-200">
             <div className="flex h-16 items-center">
               <button
                 type="button"
-                className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
                 onClick={() => setOpen(true)}
               >
-                <span className="absolute -inset-0.5" />
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
@@ -356,7 +367,7 @@ export default function Navigation() {
               </div>
 
               {/* Flyout menus */}
-              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+              <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
@@ -481,35 +492,52 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="#"
+                  {true ? (
+                    <div>
+                      <Avatar
+                      className="text-white"
+                      onClick={handleUserClick}
+                      aria-controls={open ? "basic-menu": undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      sx={{
+                        bgcolor: deepPurple[500],
+                        color: "white",
+                        cursor: "pointer",
+                      }}
+                      >
+                        S
+                      </Avatar>
+                      <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={openUserMenu}
+                      onClose={handleCloseUserMenu}
+                      MenuListProps={{
+                        "aria-labelledby" : "basic-button",
+                      }}
+                      >
+                        <MenuItem onClick={handleCloseUserMenu}>
+                          Profile
+                        </MenuItem>
+                        <MenuItem >
+                          My Orders
+                        </MenuItem>
+                        <MenuItem >
+                          Logout
+                        </MenuItem>
+                      </Menu>
+                    </div>
+                  ) : (
+                    <Button
+                    onClick={handleOpen}
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Sign in
-                  </a>
-                  <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Create account
-                  </a>
-                </div>
-
-                <div className="hidden lg:ml-8 lg:flex">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-700 hover:text-gray-800"
-                  >
-                    <img
-                      src="https://tailwindui.com/img/flags/flag-canada.svg"
-                      alt=""
-                      className="block h-auto w-5 flex-shrink-0"
-                    />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
-                    <span className="sr-only">, change currency</span>
-                  </a>
-                </div>
+                    >
+                      Signin
+                    </Button>
+                  )}
+                  </div>
+                  
 
                 {/* Search */}
                 <div className="flex lg:ml-6">

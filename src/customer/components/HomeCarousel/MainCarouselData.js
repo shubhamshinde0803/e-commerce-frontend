@@ -1,22 +1,22 @@
 export const MainCarouselData = [
   {
-    image:
+    "image":
       "https://www.ethnicplus.in/media/mageplaza/bannerslider/banner/image/1/6/16-11.jpg",
-    path: "women/clothing/spectacularsuits",
+    "path": "women/clothing/spectacularsuits",
   },
   {
-    image:
+    "image":
       "https://www.ethnicplus.in/media/mageplaza/bannerslider/banner/image/1/4/14-1.jpg",
-    path: "/women/clothing/festivaloutfits",
+    "path": "/women/clothing/festivaloutfits",
   },
   {
-    image:
+    "image":
       "https://www.ethnicplus.in/media/mageplaza/bannerslider/banner/image/1/7/17_-_copy-1.jpg",
-    path: "/women/clothing/layersfashion",
+    "path": "/women/clothing/layersfashion",
   },
   {
-    image:
+    "image":
       "https://www.ethnicplus.in/media/mageplaza/bannerslider/banner/image/1/5/15-.jpg",
-    path: "/women/clothing/latestdrapes",
+    "path": "/women/clothing/latestdrapes",
   },
 ];
