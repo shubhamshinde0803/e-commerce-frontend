@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { deepPurple } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 const navigation = {
   categories: [
@@ -145,6 +146,8 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [openAuthModal, setOpenAuthModel] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
   
@@ -157,15 +160,20 @@ export default function Navigation() {
   }
 
   const handleOpen = () => {
-    // setOpenAuthModel(true);
+    setOpenAuthModel(true);
   }
 
   const handleClose = () => {
-    // setOpenAuthModel(false);
+    setOpenAuthModel(false);
+  }
+
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.name}`);
+    close();
   }
 
   return (
-    <div className="bg-white z-50">
+    <div className="bg-white pb-10">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -371,7 +379,7 @@ export default function Navigation() {
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
-                      {({ open }) => (
+                      {({ open, close }) => (
                         <>
                           <div className="relative flex">
                             <Popover.Button
@@ -456,12 +464,13 @@ export default function Navigation() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                <a
+                                                <p onClick={()=>handleCategoryClick(category, section, item, close )}
+                                                
                                                   href={item.href}
                                                   className="hover:text-gray-800"
                                                 >
                                                   {item.name}
-                                                </a>
+                                                  </p>
                                               </li>
                                             ))}
                                           </ul>
@@ -520,7 +529,7 @@ export default function Navigation() {
                         <MenuItem onClick={handleCloseUserMenu}>
                           Profile
                         </MenuItem>
-                        <MenuItem >
+                        <MenuItem onClick={() => navigate("/account/order")} >
                           My Orders
                         </MenuItem>
                         <MenuItem >
