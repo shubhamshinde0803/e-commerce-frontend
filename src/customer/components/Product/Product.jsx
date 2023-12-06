@@ -59,7 +59,7 @@ export default function Product() {
     searchParams.set(sectionId, e.target.value);
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
-  }
+  };
 
   return (
     <div className="bg-white">
@@ -295,7 +295,6 @@ export default function Product() {
                                   <input
                                     onChange={() => {
                                       handleFilter(option.value, section.id);
-                                      
                                     }}
                                     id={`filter-${section.id}-${optionIdx}`}
                                     name={`${section.id}[]`}
@@ -361,7 +360,9 @@ export default function Product() {
                                   {section.options.map((option, optionIdx) => (
                                     <>
                                       <FormControlLabel
-                                      onChange={(e) => handleRadioButtonChange(e, section.id)}
+                                        onChange={(e) =>
+                                          handleRadioButtonChange(e, section.id)
+                                        }
                                         value={option.value}
                                         control={<Radio />}
                                         label={option.label}
