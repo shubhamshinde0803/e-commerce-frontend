@@ -15,6 +15,7 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  Pagination,
   Radio,
   RadioGroup,
 } from "@mui/material";
@@ -39,7 +40,7 @@ export default function Product() {
   const navigate = useNavigate();
   const param = useParams();
   const dispatch = useDispatch();
-  const { product } = useSelector((store) => store);
+  const { products } = useSelector((store) => store);
 
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
@@ -77,6 +78,13 @@ export default function Product() {
     navigate({ search: `?${query}` });
   };
 
+  const handlePaginationChange = (event, value) => {
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("page", value)
+    const query = searchParams.toString()
+    navigate({search:`?${query}`})
+  }
+
   useEffect(() => {
     const [minPrice, maxPrice] =
       priceValue == null ? [0, 10000] : priceValue.split("-").map(Number);
@@ -90,7 +98,7 @@ export default function Product() {
       minDiscount: discount || 0,
       sort: sortValue || "price_low",
       pageNumber: pageNumber - 1,
-      pageSize: 10,
+      pageSize: 1,
       stock: stock,
     };
     dispatch(findProducts(data));
@@ -428,8 +436,8 @@ export default function Product() {
                 <div className="flex flex-wrap justify-center bg-white py-5">
                   {/* {console.log(product.products?.content)} */}
 
-                  {product.products &&
-                    product.products?.content?.map((item) => (
+                  {products.products &&
+                    products.products?.content?.map((item) => (
                       <ProductCard product={item} />
                     ))}
 
@@ -438,6 +446,11 @@ export default function Product() {
                   ))} */}
                 </div>
               </div>
+            </div>
+          </section>
+          <section className="w-full px-[3.6rem]">
+            <div className="px-4 py-5 flex justify-center">
+            <Pagination count={products.products?.totalPages} color="secondary" onChange={handlePaginationChange}/>
             </div>
           </section>
         </main>
