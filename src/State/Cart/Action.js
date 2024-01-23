@@ -14,11 +14,13 @@ import {
   UPDATE_CART_ITEM_SUCCESS,
 } from "./ActionType";
 
-export const get = (reqData) => async (dispatch) => {
+export const getCart = (reqData) => async (dispatch) => {
+  debugger;
   dispatch({ type: GET_CART_REQUEST });
 
   try {
     const { data } = await api.get(`/api/cart/`);
+    console.log("cart: ", data);
     dispatch({ type: GET_CART_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: GET_CART_FAILURE, payload: error.message });
@@ -30,11 +32,10 @@ export const addItemToCart = (reqData) => async (dispatch) => {
   dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
 
   try {
-    console.log("reqData: ", reqData)
+    console.log("reqData: ", reqData);
     const { data } = await api.put("/api/cart/add", reqData);
-    console.log("data: ", data)
+    console.log("data: ", data);
     dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
-    
   } catch (error) {
     dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: error.message });
   }

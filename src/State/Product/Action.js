@@ -9,6 +9,7 @@ import {
 } from "./ActionType";
 
 export const findProducts = (reqData) => async (dispatch) => {
+  debugger;
   dispatch({ type: FIND_PRODUCT_REQUEST });
   const {
     colors,
@@ -38,10 +39,10 @@ export const findProductsById = (reqData) => async (dispatch) => {
   // debugger;
   dispatch({ type: FIND_PRODUCT_BY_ID_REQUEST });
   try {
-    const  productId  = reqData; //reqData is only providing value of product Id dont put {} over productId
-    console.log("productId", productId)
+    const productId = reqData; //reqData is only providing value of product Id dont put {} over productId
+    console.log("productId", productId);
     const { data } = await api.get(`/api/products/id/${productId}`);
-    console.log("inside findProductsById, ", data)
+    console.log("inside findProductsById, ", data);
     dispatch({ type: FIND_PRODUCT_BY_ID_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: FIND_PRODUCT_BY_ID_FAILURE, payload: error.message });

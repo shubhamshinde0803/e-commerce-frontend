@@ -21,6 +21,7 @@ const initialState = {
 };
 
 export const cartReducer = (state = initialState, action) => {
+  console.log("action.payload", action.payload);
   switch (action.type) {
     case ADD_ITEM_TO_CART_REQUEST:
       return { ...state, loading: true, error: null };
