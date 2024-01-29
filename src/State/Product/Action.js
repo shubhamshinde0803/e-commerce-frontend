@@ -9,7 +9,7 @@ import {
 } from "./ActionType";
 
 export const findProducts = (reqData) => async (dispatch) => {
-  debugger;
+  // debugger;
   dispatch({ type: FIND_PRODUCT_REQUEST });
   const {
     colors,

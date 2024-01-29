@@ -15,8 +15,8 @@ const initialState = {
 };
 
 export const customreProductReducer = (state = initialState, action) => {
-  console.log("action.type", action.type);
-  // console.log("action.payload",action.payload);
+  // console.log("action.type", action.type);
+  // console.log("action.payload in product reducer",action.payload);
 
   switch (action.type) {
     case FIND_PRODUCT_REQUEST:

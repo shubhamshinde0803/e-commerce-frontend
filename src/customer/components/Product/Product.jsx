@@ -40,7 +40,7 @@ export default function Product() {
   const navigate = useNavigate();
   const param = useParams();
   const dispatch = useDispatch();
-  const { products } = useSelector((store) => store);
+  const { products } = useSelector((store) => store.products);
 
   const decodedQueryString = decodeURIComponent(location.search);
   const searchParams = new URLSearchParams(decodedQueryString);
@@ -98,20 +98,12 @@ export default function Product() {
       minDiscount: discount || 0,
       sort: sortValue || "price_low",
       pageNumber: pageNumber - 1,
-      pageSize: 1,
+      pageSize: 5,
       stock: stock,
     };
+    
     dispatch(findProducts(data));
-  }, [
-    param.levelThree,
-    colorValue,
-    sizeValue,
-    priceValue,
-    discount,
-    sortValue,
-    pageNumber,
-    stock,
-  ]);
+  }, [param.levelThree, colorValue, sizeValue, priceValue, discount, sortValue, pageNumber, stock, dispatch]);
 
   return (
     <div className="bg-white">
@@ -434,10 +426,10 @@ export default function Product() {
               {/* Product grid */}
               <div className="lg:col-span-4 w-full">
                 <div className="flex flex-wrap justify-center bg-white py-5">
-                  {/* {console.log(product.products?.content)} */}
+                  {/* {console.log("products.",products?.content)} */}
 
-                  {products.products &&
-                    products.products?.content?.map((item) => (
+                  {products &&
+                    products?.content?.map((item) => (
                       <ProductCard product={item} />
                     ))}
 
@@ -450,7 +442,7 @@ export default function Product() {
           </section>
           <section className="w-full px-[3.6rem]">
             <div className="px-4 py-5 flex justify-center">
-            <Pagination count={products.products?.totalPages} color="secondary" onChange={handlePaginationChange}/>
+            <Pagination count={products?.totalPages} color="secondary" onChange={handlePaginationChange}/>
             </div>
           </section>
         </main>

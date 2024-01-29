@@ -17,7 +17,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getCart());
-  }, []);
+  }, [cart.updateCartItems, cart.deleteCartItems, dispatch]);
 
   return (
     <div>
@@ -33,7 +33,7 @@ const Cart = () => {
             <hr />
             <div className="space-y-3 font-semibold mb-10">
               <div className="flex justify-between pt-3 text-black">
-                <span>Price(3 items)</span>
+                <span>Price</span>
                 <span>₹{cart.cart?.totalPrice}</span>
               </div>
               <div className="flex justify-between pt-3 ">
