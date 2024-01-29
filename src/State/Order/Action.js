@@ -9,6 +9,7 @@ import {
 import { api } from "../../config/apiConfig";
 
 export const createOrder = (reqData) => async (dispatch) => {
+  debugger;
   dispatch({ type: CREATE_ORDER_REQUEST });
   try {
     const { data } = await api.post(`/api/orders/`, reqData.address);
