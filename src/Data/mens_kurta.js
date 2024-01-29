@@ -1070,7 +1070,7 @@ export const mens_kurta=[
         "color": "Pink",
         "discountedPrice": 362,
         "price": 1499,
-        "discountPersent": 75,
+        "discountPercent": 75,
         "size": [
             {
               "name": "S",

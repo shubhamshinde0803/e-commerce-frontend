@@ -1,14 +1,32 @@
 import { Box, Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import AddressCard from "../AddressCard/AddressCard";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createOrder } from "../../../State/Order/Action";
 
 const DeliveryAddressForm = () => {
+  console.log("inside delivery addr form");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = new FormData(e.currentTarget);
-        console.log("formdata", data);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+
+    const address = {
+      firstName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      streetAddress: data.get("address"),
+      city: data.get("city"),
+      state: data.get("state"),
+      zipCode: data.get("zip"),
+      mobile: data.get("phoneNumber"),
+    };
+    const orderData = { address, navigate };
+    dispatch(createOrder(orderData));
+    console.log("address", address);
+  };
 
   return (
     <div>
@@ -89,8 +107,8 @@ const DeliveryAddressForm = () => {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    id="zipcode"
-                    name="zipcode"
+                    id="zip"
+                    name="zip"
                     label="Zip / Postal Code"
                     fullWidth
                     autoComplete="shipping postal-code"
@@ -107,14 +125,14 @@ const DeliveryAddressForm = () => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                <Button
-              sx={{ py:1.5, mt: 2, bgcolor: "RGB(145 85 253)" }}
-              size="large"
-              variant="containe"
-              type="submit"
-            >
-              Deliver here
-            </Button>
+                  <Button
+                    sx={{ py: 1.5, mt: 2, bgcolor: "RGB(145 85 253)" }}
+                    size="large"
+                    variant="containe"
+                    type="submit"
+                  >
+                    Deliver here
+                  </Button>
                 </Grid>
               </Grid>
             </form>
